@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+    padding: 0;
+    
+}
+
+.mainconteiner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 30px;
+    height: 100vh;
+
+}
+
+.card {
+    width: 20%;
+    height: 50%;
+    border: 2px solid;
+    text-align: center;
+    position: relative;
+    background-color: white;
+    position: relative;
+    
+}
+
+.fa-filter, .fa-file, .fa-mug-saucer {
+  font-size: 30px;
+  border: 2px solid;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+}
+
+ i {
+}
+
+h2 {
+    font-size: 30px;
+}
+
+p {
+    font-size: 30px;
+}
+
+button {
+    background-color: rgb(10, 122, 79);
+    width: 200px ;
+    height: 60px ;
+}

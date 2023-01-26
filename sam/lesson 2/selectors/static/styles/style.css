@@ -1,0 +1,18 @@
+/* 
+по тегу 1
+класс 10
+id 100
+стиль в самому тезі 1000
+ */
+
+ .main.border-div {
+    background-color: rgb(71, 59, 59);
+    border-style: dotted;
+}
+ .main {
+    background-color: brown;
+}
+
+.border-div {
+    border-style: solid !important;
+}
