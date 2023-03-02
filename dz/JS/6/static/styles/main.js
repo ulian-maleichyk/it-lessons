@@ -38,9 +38,7 @@ let str = ' dirty string   ';
 let arrNumb = [10,8,-7,55,987,-1011,0,1050,0];
 
 let arr = [10,8,-7,55,987,-1011,0,1050,0];
-let string = arr.map(item => {
-     return item.toString();
-});
+let string = arr.map(item => { return item.toString();});
 console.log(string); 
 
 let sortDown = function sortDown(direction) {
