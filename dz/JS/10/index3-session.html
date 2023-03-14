@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<style>
+    .wrapper {
+        width: 350px;
+        padding: 10px;
+    }
+    .item {
+        margin-top: 10px;
+        border: red 2px solid;
+    }
+</style>
+
+
+
+
+
+    <script>
+
+const json = localStorage.getItem('sessions');
+const sessions = json ? JSON.parse(json) : [];
+
+for (const session of sessions) {
+    const wrapper = document.createElement('div');
+    const date = document.createElement('div');
+    const time = document.createElement('div');
+    const device = document.createElement('div');
+
+    wrapper.classList.add('wrapper', 'item');
+
+    const dataObj = format(session.date);
+
+    date.innerText = `Date: ${dataObj.DD}/${dataObj.MM}/${dataObj.YYY}`;
+    time.innerText = `Time: ${dataObj.hh}:${dataObj.mm}:${dataObj.ss}`;
+    device.innerText = `device: ${session.appCodeName}/${session.appVersion}`;
+
+    wrapper.append(date, time, device);
+    document.body.appendChild(wrapper);
+}
+
+function format(dateString) {
+    const YYY = new Date(dateString).getFullYear().toString();
+    const MM = (new Date(dateString).getMonth() + 1).toString();
+    const DD = new Date(dateString).getDate().toString();
+    const hh = new Date(dateString).getHours().toString();
+    const mm = new Date(dateString).getMinutes().toString();
+    const ss = new Date(dateString).getSeconds().toString();
+
+    return {
+        YYY: YYY,  
+        MM: MM.length < 2 ? `0${MM}` : MM,
+        DD: DD.length < 2 ? `0${DD}` : DD,
+        hh: hh.length < 2 ? `0${hh}` : hh,
+        mm: mm.length < 2 ? `0${mm}` : mm,
+        ss: ss.length < 2 ? `0${ss}` : ss,
+
+    }
+}
+    </script>
+</body>
+</html>
