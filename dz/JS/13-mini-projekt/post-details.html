@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- На странице post-details.html:
+    7 Вивести всю, без виключення, інформацію про об'єкт post на який клікнули .
+    8 Нижчє інформаці про пост, вивести всі коментарі поточного поста
+     (ендпоінт  - https://jsonplaceholder.typicode.com/posts/POST_ID/comments) -->
+    
+<script>
+
+let url = new URL(location.href);
+      let json = url.searchParams.get(`post`);
+      let post = JSON.parse(json);
+
+      console.log(post);
+
+      let div = document.createElement("div");
+      div.classList.add("user-item");
+      let h3 = document.createElement("h3");
+
+      h3.innerText = `userId: ${post.userId} 
+                id:${post.id} 
+                title: ${post.title}
+                body: ${post.body}
+                `;
+      div.appendChild(h3);
+      document.body.appendChild(div);
+
+
+      let urlcoments = new URL(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`);
+console.log(urlcoments);
+      fetch(urlcoments)
+        .then((value) => value.json())
+        .then((coments) => {
+          for (const coment of coments) {
+            let div = document.createElement("div");
+            div.classList.add("user-item");
+            let a = document.createElement("a");
+            a.innerText = `
+            postId: ${coment.postId}
+            id: ${coment.id}
+            name: ${coment.name}
+            email: ${coment.email}
+            body: ${coment.body}
+            `;
+            div.appendChild(a);
+            document.body.appendChild(div);
+          }
+        });
+
+
+</script>
+
+</body>
+</html>

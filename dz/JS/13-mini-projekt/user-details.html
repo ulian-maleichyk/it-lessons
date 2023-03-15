@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- На странице user-details.html:
+    4 Вивести всю, без виключення, інформацію про об'єкт user на який клікнули
+    5 Додати кнопку "post of current user", при кліку на яку, з'являються title всіх постів поточного юзера
+    (для получения постов используйте эндпоинт https://jsonplaceholder.typicode.com/users/USER_ID/posts)
+    6 Каждому посту додати кнопку/посилання, при кліку на яку відбувається перехід на сторінку post-details.html,
+     котра має детальну інфу про поточний пост. -->
+
+    <style>
+      .post-of-current-user {
+        width: 150px;
+        height: 30px;
+      }
+    </style>
+
+    <script>
+      let url = new URL(location.href);
+      let json = url.searchParams.get(`user`);
+      let user = JSON.parse(json);
+
+      console.log(user);
+
+      let div = document.createElement("div");
+      div.classList.add("user-item");
+      let h3 = document.createElement("h3");
+
+      h3.innerText = `id: ${user.id} 
+                name: ${user.name} 
+                username: ${user.username}
+                email: ${user.email}
+                street: ${user.address.street}
+                suite: ${user.address.suite}
+                city: ${user.address.city}
+                zipcode: ${user.address.zipcode}
+                geo:  ${user.address.geo} 
+                lat: ${user.address.geo.lat}
+                lng: ${user.address.geo.lng}
+                phone: ${user.phone}
+                website: ${user.website}
+                name: ${user.company.name}
+                catchPhrase: ${user.company.catchPhrase},
+                bs: ${user.company.bs}`;
+
+      div.appendChild(h3);
+      document.body.appendChild(div);
+
+      let button = document.createElement("button");
+      button.classList.add("button-item");
+      button.innerText = `post of current user`;
+      button.classList.add("post-of-current-user");
+      document.body.appendChild(button);
+      button.setAttribute('id', '1')
+      let postOfCurrentUser = document.getElementById ('1');
+
+      postOfCurrentUser.addEventListener("click", openUsersList);
+      
+      function openUsersList() {
+        let urlposts = new URL(
+        `https://jsonplaceholder.typicode.com/users/${user.id}/posts`
+      );
+
+      fetch(urlposts)
+        .then((value) => value.json())
+        .then((posts) => {
+          for (const post of posts) {
+            let div = document.createElement("div");
+            div.classList.add("user-item");
+            let a = document.createElement("a");
+            a.innerText = `${post.title}
+            
+            `;
+            a.href = 'post-details.html?post=' + JSON.stringify(post);
+            
+            div.appendChild(a);
+            document.body.appendChild(div);
+          }
+        });
+
+}
+      
+      
+      
+    </script>
+  </body>
+</html>
