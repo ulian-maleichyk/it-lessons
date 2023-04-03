@@ -35,24 +35,45 @@
     Всі елементи котрі характеризують users, posts, comments візуалізувати, так, щоб було видно що
      це блоки (дати фон. марджини і тд) -->
 
+<style>
+
+.main-conteiner {
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+  grid-column-gap: 10px;
+   grid-row-gap: 1em;
+}
+
+.user-item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: larger;
+}
+
+</style>
+
 <script>
 
 let url = new URL("http://jsonplaceholder.typicode.com/users");
       fetch(url)
         .then((value) => value.json())
         .then((users) => {
-          for (const user of users) {
+           let mainDiv = document.createElement('div')
+           mainDiv.classList.add('main-conteiner')
+            for (const user of users) {
             let div = document.createElement("div");
             div.classList.add("user-item");
             let a = document.createElement("a");
             a.innerText = `${user.id} ${user.name}` ;
             a.href = 'user-details.html?user=' + JSON.stringify(user);
             div.appendChild(a)
-            document.body.appendChild(div)
+            document.body.appendChild(div) 
+            mainDiv.appendChild(div)
           }
-
+          document.body.appendChild(mainDiv)
         });
-
+       
 </script>
 
 </body>

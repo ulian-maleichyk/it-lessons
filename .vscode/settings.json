@@ -1,0 +1,8 @@
+{
+  "sqltools.connections": [],
+  "dataworkspace.excludedProjects": [
+    "SQL-lesson1/SQL-lesson1.sqlproj",
+    "qaz/qaz.sqlproj",
+    "qweqwe/qweqwe.sqlproj"
+  ]
+}
